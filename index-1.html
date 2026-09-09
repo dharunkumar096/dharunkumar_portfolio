@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dharunkumar C — AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#10141C;
+    --surface:#171C26;
+    --surface-2:#1D2330;
+    --line:#2A3240;
+    --paper:#EDEEE4;
+    --muted:#8B93A3;
+    --amber:#D4A24C;
+    --teal:#5EA8A0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- top status bar ---------- */
+  .statusbar{
+    border-bottom:1px solid var(--line);
+    padding:14px 0;
+    background:var(--surface);
+  }
+  .statusbar .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+    font-size:12.5px;
+    color:var(--muted);
+    letter-spacing:.02em;
+  }
+  .statusbar .dot{
+    display:inline-block;
+    width:7px;height:7px;
+    border-radius:50%;
+    background:var(--amber);
+    margin-right:8px;
+    box-shadow:0 0 0 3px rgba(212,162,76,0.15);
+  }
+  .statusbar nav a{
+    color:var(--muted);
+    text-decoration:none;
+    margin-left:20px;
+    transition:color .15s ease;
+  }
+  .statusbar nav a:hover{color:var(--paper);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:96px 0 88px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero .hero-grid{
+    display:grid;
+    grid-template-columns:1fr 220px;
+    gap:56px;
+    align-items:start;
+  }
+  .hero .role{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--teal);
+    letter-spacing:.06em;
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(40px, 6vw, 68px);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    max-width:11ch;
+  }
+  .hero .tagline{
+    margin-top:22px;
+    max-width:56ch;
+    font-size:17px;
+    color:var(--muted);
+  }
+  .hero .contact-row{
+    margin-top:36px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 14px;
+  }
+  .hero .contact-row a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--paper);
+    text-decoration:none;
+    border:1px solid var(--line);
+    padding:8px 14px;
+    border-radius:3px;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .hero .contact-row a:hover{
+    border-color:var(--amber);
+    color:var(--amber);
+  }
+
+  /* ---------- portrait card ---------- */
+  .portrait-card{
+    border:1px solid var(--line);
+    background:var(--surface);
+    padding:10px;
+  }
+  .portrait-card .frame{
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .portrait-card img{
+    display:block;
+    width:100%;
+    height:auto;
+    aspect-ratio:4/5;
+    object-fit:cover;
+    filter:grayscale(35%) contrast(1.04) brightness(0.96) sepia(8%) hue-rotate(-8deg);
+  }
+  .portrait-card .cap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 4px 2px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    color:var(--muted);
+    letter-spacing:.03em;
+  }
+  .portrait-card .cap .live{
+    color:var(--amber);
+  }
+  @media (max-width:760px){
+    .hero .hero-grid{
+      grid-template-columns:1fr;
+    }
+    .portrait-card{
+      max-width:220px;
+      order:-1;
+      margin-bottom:36px;
+    }
+  }
+
+  /* ---------- section shell ---------- */
+  section{
+    padding:72px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .section-head{
+    display:grid;
+    grid-template-columns:36px 1fr;
+    align-items:baseline;
+    gap:0;
+    margin-bottom:40px;
+  }
+  .section-head .idx{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--muted);
+  }
+  .section-head h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:28px;
+    letter-spacing:-0.01em;
+  }
+
+  /* ---------- about ---------- */
+  .about p{
+    max-width:70ch;
+    color:#C7CAD3;
+    font-size:16px;
+  }
+  .about p + p{margin-top:16px;}
+
+  /* ---------- pipeline rail (experience + projects) ---------- */
+  .rail{
+    position:relative;
+    padding-left:36px;
+  }
+  .rail::before{
+    content:"";
+    position:absolute;
+    left:5px;
+    top:6px;
+    bottom:6px;
+    width:1px;
+    background:var(--line);
+  }
+  .node{
+    position:relative;
+    padding-bottom:52px;
+  }
+  .node:last-child{padding-bottom:0;}
+  .node::before{
+    content:"";
+    position:absolute;
+    left:-36px;
+    top:6px;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:var(--ink);
+    border:1px solid var(--amber);
+  }
+  .node .meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:.03em;
+    margin-bottom:6px;
+  }
+  .node h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:20px;
+    margin-bottom:4px;
+  }
+  .node .sub{
+    font-size:14px;
+    color:var(--teal);
+    margin-bottom:14px;
+  }
+  .node ul{
+    list-style:none;
+    max-width:66ch;
+  }
+  .node ul li{
+    position:relative;
+    padding-left:16px;
+    color:#C7CAD3;
+    font-size:15px;
+    margin-bottom:8px;
+  }
+  .node ul li::before{
+    content:"–";
+    position:absolute;
+    left:0;
+    color:var(--muted);
+  }
+  .node .stack{
+    margin-top:14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--muted);
+    line-height:1.9;
+  }
+
+  /* ---------- skills stack ---------- */
+  .stackgrid{
+    border-top:1px solid var(--line);
+  }
+  .stackrow{
+    display:grid;
+    grid-template-columns:180px 1fr;
+    border-bottom:1px solid var(--line);
+    padding:18px 0;
+    gap:16px;
+  }
+  .stackrow .layer{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--amber);
+    letter-spacing:.03em;
+    padding-top:2px;
+  }
+  .stackrow .items{
+    color:#C7CAD3;
+    font-size:14.5px;
+    line-height:1.9;
+  }
+  .stackrow .items span{
+    color:var(--muted);
+  }
+  @media (max-width:600px){
+    .stackrow{grid-template-columns:1fr;gap:6px;}
+  }
+
+  /* ---------- academic / certs two-col ---------- */
+  .twocol{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+  }
+  @media (max-width:700px){
+    .twocol{grid-template-columns:1fr;}
+  }
+  .twocol h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:.05em;
+    margin-bottom:18px;
+    text-transform:uppercase;
+  }
+  .certlist, .acadlist{list-style:none;}
+  .certlist li{
+    font-size:14.5px;
+    color:#C7CAD3;
+    padding:10px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .acadlist li{
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .acadlist li:first-child{padding-top:0;}
+  .acadlist .aname{
+    font-size:15px;
+    color:var(--paper);
+    margin-bottom:4px;
+  }
+  .acadlist .adesc{
+    font-size:13.5px;
+    color:var(--muted);
+  }
+
+  /* ---------- languages ---------- */
+  .langs{
+    display:flex;
+    gap:32px;
+    flex-wrap:wrap;
+    margin-top:16px;
+  }
+  .langs div{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+  }
+  .langs div .l-name{color:var(--paper);}
+  .langs div .l-level{color:var(--muted); display:block; margin-top:2px; font-size:11.5px;}
+
+  /* ---------- footer / contact ---------- */
+  footer{
+    padding:64px 0 48px;
+  }
+  footer h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:30px;
+    margin-bottom:18px;
+    max-width:14ch;
+  }
+  footer p{
+    color:var(--muted);
+    max-width:50ch;
+    margin-bottom:28px;
+    font-size:15px;
+  }
+  .foot-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .foot-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    text-decoration:none;
+    color:var(--ink);
+    background:var(--amber);
+    padding:11px 18px;
+    border-radius:3px;
+    transition:opacity .15s ease;
+  }
+  .foot-links a.secondary{
+    background:transparent;
+    color:var(--paper);
+    border:1px solid var(--line);
+  }
+  .foot-links a:hover{opacity:.85;}
+  .end-status{
+    margin-top:56px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--muted);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  @media (max-width:600px){
+    .wrap{padding:0 20px;}
+    .hero{padding:64px 0 56px;}
+    section{padding:56px 0;}
+  }
+</style>
+</head>
+<body>
+
+<div class="statusbar">
+  <div class="wrap">
+    <div><span class="dot"></span>open to work — generative ai engineer roles, india</div>
+    <nav>
+      <a href="#experience">experience</a>
+      <a href="#projects">projects</a>
+      <a href="#skills">skills</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="role">AI ENGINEER — GENERATIVE AI / LLMS / RAG</div>
+        <h1>Dharunkumar C</h1>
+        <p class="tagline">I build Python-based generative AI systems — retrieval pipelines, multi-agent workflows, and LLM applications — for enterprise use cases like fraud investigation, claim adjudication, and document intelligence.</p>
+        <div class="contact-row">
+          <a href="mailto:dharunkumar.engineer@gmail.com">dharunkumar.engineer@gmail.com</a>
+          <a href="tel:+919344355248">+91 93443 55248</a>
+          <a href="https://github.com/dharunkumar-engineer" target="_blank" rel="noopener">github.com/dharunkumar-engineer</a>
+        </div>
+      </div>
+      <div class="portrait-card">
+        <div class="frame">
+          <img src="assets/photo.jpg" alt="Portrait of Dharunkumar C">
+        </div>
+        <div class="cap">
+          <span>DHARUNKUMAR_C</span>
+          <span class="live">● status: available</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="idx mono">00</span>
+      <h2>Summary</h2>
+    </div>
+    <p>IT graduate and AI engineer with hands-on experience building generative AI, LLM, RAG, and machine learning applications in Python. I work across the full stack of a retrieval system — embeddings, vector search, orchestration frameworks like LangChain and LangGraph — and connect it to cloud platforms including AWS Bedrock and Azure OpenAI.</p>
+    <p>My focus has been enterprise workflows that need to be trustworthy as well as capable: fraud analysis, healthcare claim adjudication, document processing, and decision support, with attention to evaluation, observability, guardrails, and human-in-the-loop review at every step.</p>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="idx mono">01</span>
+      <h2>Experience</h2>
+    </div>
+    <div class="rail">
+      <div class="node">
+        <div class="meta">DEC 2025 — JUN 2026</div>
+        <h3>Generative AI Intern</h3>
+        <div class="sub">WNS Global Solutions</div>
+        <ul>
+          <li>Built document ingestion and preprocessing workflows using Python and LangChain for enterprise generative AI applications.</li>
+          <li>Implemented semantic retrieval with FAISS to surface relevant information from structured and unstructured business data.</li>
+          <li>Processed claim and transaction data in PostgreSQL, supporting validation, accuracy checks, and AI-assisted decision workflows.</li>
+          <li>Designed and tested fraud-analysis workflows covering transaction patterns, customer information, compliance rules, and risk indicators.</li>
+          <li>Evaluated AI-generated responses for consistency, relevance, and accuracy, and maintained audit logs to support traceability across the workflow.</li>
+        </ul>
+        <div class="stack">python · langchain · faiss · postgresql · audit logging</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="idx mono">02</span>
+      <h2>Projects</h2>
+    </div>
+    <div class="rail">
+      <div class="node">
+        <div class="meta">MULTI-AGENT · RAG · RISK SCORING</div>
+        <h3>Banking Fraud Alert &amp; Risk Scoring Platform</h3>
+        <div class="sub">Python, FastAPI, LangGraph, AWS Bedrock</div>
+        <ul>
+          <li>Designed an event-driven multi-agent workflow with dedicated agents for fraud classification, risk scoring, rule validation, customer profiling, and case recommendations.</li>
+          <li>Built RAG retrieval over AML rules, fraud patterns, and compliance policy documents using Amazon Titan Embeddings and OpenSearch Vector Database.</li>
+          <li>Integrated Bedrock Claude to generate fraud investigation summaries, risk explanations, and suspicious activity narratives.</li>
+          <li>Added guardrails against unsafe recommendations, hallucinated compliance statements, and unauthorized data exposure.</li>
+          <li>Evaluated the RAG pipeline with RAGAS — faithfulness, answer relevance, context precision, and context recall.</li>
+        </ul>
+        <div class="stack">fastapi · langgraph · bedrock · opensearch · dynamodb · cloudwatch · ragas</div>
+      </div>
+
+      <div class="node">
+        <div class="meta">RAG · CONVERSATIONAL MEMORY · BATCH PROCESSING</div>
+        <h3>Healthcare Claim Adjudication GenAI Assistant</h3>
+        <div class="sub">Python, LangChain, Azure OpenAI, Llama 3, FAISS</div>
+        <ul>
+          <li>Built document ingestion for claim forms, medical bills, discharge summaries, and adjudication guidelines.</li>
+          <li>Implemented embedding-based retrieval over policy clauses, member eligibility, CPT/ICD descriptions, and medical guidelines.</li>
+          <li>Wrote prompts for claim summaries, approval/denial reasoning, missing-document alerts, and adjudication recommendations.</li>
+          <li>Added Redis-based conversational memory for multi-turn, context-aware claim analysis.</li>
+          <li>Used Celery for batch processing large claim volumes, and MLflow with Prometheus/Grafana to track prompt versions, outputs, and response-quality over time.</li>
+        </ul>
+        <div class="stack">langchain · azure openai · faiss · redis · celery · mlflow · prometheus</div>
+      </div>
+
+      <div class="node">
+        <div class="meta">ACADEMIC · COMPUTER VISION</div>
+        <h3>Brain Tumor Detection Using Deep Learning</h3>
+        <div class="sub">Python, TensorFlow, Keras, VGG16, Flask</div>
+        <ul>
+          <li>Built an MRI image classification application to identify brain tumor categories with a VGG16-based model.</li>
+          <li>Handled preprocessing, augmentation, and feature extraction to prepare MRI data for training and inference.</li>
+          <li>Created a Flask interface for uploading MRI images and viewing prediction results.</li>
+        </ul>
+        <div class="stack">tensorflow · keras · vgg16 · opencv · flask</div>
+      </div>
+
+      <div class="node">
+        <div class="meta">ACADEMIC · COMPUTER VISION</div>
+        <h3>Steel Surface Defect Detection</h3>
+        <div class="sub">Python, PyTorch, Deep Learning</div>
+        <ul>
+          <li>Built a computer vision system to detect and classify defects in steel surface images.</li>
+          <li>Implemented defect classification and segmentation-based location analysis for automated visual inspection.</li>
+        </ul>
+        <div class="stack">pytorch · image segmentation · computer vision</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="idx mono">03</span>
+      <h2>Stack</h2>
+    </div>
+    <div class="stackgrid">
+      <div class="stackrow">
+        <div class="layer">GENERATIVE AI</div>
+        <div class="items">LLMs, RAG, Prompt Engineering, Tool Calling, Semantic Search, Embeddings, Conversational AI, AI Agents, Agentic AI</div>
+      </div>
+      <div class="stackrow">
+        <div class="layer">FRAMEWORKS</div>
+        <div class="items">LangChain, LangGraph, LlamaIndex, Hugging Face</div>
+      </div>
+      <div class="stackrow">
+        <div class="layer">PLATFORMS &amp; MODELS</div>
+        <div class="items">AWS Bedrock, Azure OpenAI, Llama 3, Claude, Amazon Titan Embeddings</div>
+      </div>
+      <div class="stackrow">
+        <div class="layer">RETRIEVAL</div>
+        <div class="items">FAISS, OpenSearch Vector Database, Document Ingestion, Embedding Pipelines, Semantic Retrieval</div>
+      </div>
+      <div class="stackrow">
+        <div class="layer">BACKEND</div>
+        <div class="items">FastAPI, Flask, REST APIs, Microservices, Python, SQL, JavaScript</div>
+      </div>
+      <div class="stackrow">
+        <div class="layer">DATA</div>
+        <div class="items">PostgreSQL, DynamoDB, Redis, FAISS, OpenSearch</div>
+      </div>
+      <div class="stackrow">
+        <div class="layer">EVALUATION</div>
+        <div class="items">MLflow, RAGAS, Prometheus, Grafana, Model &amp; Prompt Evaluation</div>
+      </div>
+      <div class="stackrow">
+        <div class="layer">GOVERNANCE</div>
+        <div class="items">Guardrails, Human-in-the-Loop, Access Control, Audit Logging, Traceability</div>
+      </div>
+      <div class="stackrow">
+        <div class="layer">CLOUD</div>
+        <div class="items">AWS Lambda, Amazon SQS, API Gateway, IAM, S3, Azure Blob Storage, Docker, Kubernetes</div>
+      </div>
+      <div class="stackrow">
+        <div class="layer">MACHINE LEARNING</div>
+        <div class="items">Deep Learning, Computer Vision, Image Processing, Object Detection, Image Segmentation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="idx mono">04</span>
+      <h2>Education &amp; Certifications</h2>
+    </div>
+    <div class="twocol">
+      <div>
+        <h4>Education</h4>
+        <ul class="acadlist">
+          <li>
+            <div class="aname">Bachelor of Engineering, Information Technology</div>
+            <div class="adesc">Parul University, Vadodara — Jul 2022 to Jun 2026</div>
+          </li>
+        </ul>
+        <h4 style="margin-top:36px;">Languages</h4>
+        <div class="langs">
+          <div><span class="l-name">English</span><span class="l-level">Fluent</span></div>
+          <div><span class="l-name">Hindi</span><span class="l-level">Fluent</span></div>
+          <div><span class="l-name">Tamil</span><span class="l-level">Fluent</span></div>
+          <div><span class="l-name">Telugu</span><span class="l-level">Professional</span></div>
+        </div>
+      </div>
+      <div>
+        <h4>Certifications</h4>
+        <ul class="certlist">
+          <li>AWS Certified Machine Learning Engineer – Associate</li>
+          <li>Machine Learning with Python — Great Learning Academy</li>
+          <li>Microsoft Azure AI Fundamentals (AI-900)</li>
+          <li>Google Generative AI Fundamentals</li>
+          <li>NPTEL — Computer Networks and Internet Protocol</li>
+          <li>NPTEL — Theory of Computation</li>
+          <li>NPTEL — Introduction to Internet of Things</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's build something.</h2>
+    <p>Open to entry-level Generative AI Engineer roles. Happy to walk through any of the projects above in more depth, or talk through a specific problem you're working on.</p>
+    <div class="foot-links">
+      <a href="mailto:dharunkumar.engineer@gmail.com">Email me</a>
+      <a class="secondary" href="tel:+919344355248">Call — +91 93443 55248</a>
+      <a class="secondary" href="https://github.com/dharunkumar-engineer" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="end-status">
+      <span>dharunkumar c — ai engineer portfolio</span>
+      <span>status: available</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
